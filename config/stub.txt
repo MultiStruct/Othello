@@ -1,0 +1,17 @@
+read id:int
+gameloop
+read height:int
+loop height read line:word(12)
+read actionCount:int
+loop actionCount read action:word(6)
+write f4
+
+INPUT
+id: id of your player.
+height: number of rows.
+line: rows from top to bottom (viewer perspective).
+actionCount: number of legal actions for this turn.
+action: the action
+
+OUTPUT
+a-h1-8

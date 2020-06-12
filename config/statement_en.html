@@ -1,0 +1,147 @@
+<div style="color:#000000;background-color:rgba(255, 255, 255, 0.5);padding:20px;margin-bottom:10px;text-align:left">
+  This is a port from the board game <a href="https://en.wikipedia.org/wiki/Reversi#Othello">Othello</a>.
+  <br>Click <a href="https://github.com/MultiStruct/Othello">here</a> for the referee.<br>
+</div>
+
+<div id="statement_back" class="statement_back" style="display:none"></div>
+<div class="statement-body">
+  <!-- GOAL -->
+  <div class="statement-section statement-goal">
+    <h1>
+      <span class="icon icon-goal">&nbsp;</span>
+      <span>The Goal</span>
+    </h1>
+    <div class="statement-goal-content">
+      The goal of the game is to have more discs than your opponent.
+    </div>
+  </div>
+  <!-- RULES -->
+  <div class="statement-section statement-rules">
+    <h1>
+        <span class="icon icon-rules">&nbsp;</span>
+        <span>Rules</span>
+    </h1>
+    <div class="statement-rules-content">
+        <strong>Grid: </strong><br> Game is played on an 8x8 board.<br><br>
+        <strong>The grid notation is represented in the image below:</strong>
+        <p style="text-align: center;"><img src="https://cdn-games.codingame.com/community/1540478-1591830398920/960cf8ee5e4332743a5d72d794c6a23a710ed7f24cfb93fce51188becbf190a6.png" style="height: 250px; width: auto;"></img></p>
+        <br>
+        <strong>The board always starts with 4 discs placed, represented in the image below:</strong>
+        <p style="text-align: center;"><img src="https://cdn-games.codingame.com/community/1540478-1591830398920/9ff3ed92777e95cbde858d44c0ff7d21b247811ed4a13a14d9053ecbb27a05de.png" style="height: 250px; width: auto;"></img></p>
+        <br>
+        <strong>Turn order: </strong><br>
+        <ul>
+          <li>Player 0(<strong style="color:#ff1d5c">red</strong>) is assigned black pieces and Player 1(<strong style="color:#22a1e4">blue</strong>) is assigned white pieces.</li>
+          <li>Black always go first and white goes next.</li>
+        </ul>
+        
+        <br>
+        <strong>Legal action: </strong><br>
+          <ul>
+            <li>The action must be done on an empty square, this square must also be adjacent to at least one opponent disc, this square must also be placed so that at least in one direction (horizontal, vertical or diagonally) there is a disc of the player playing, the disc must form a line over
+              the opponent disc/discs, all the opponent discs that are on this line are flipped, if there are multiple lines, all the discs will discs affected will be flipped.</li>
+        </ul>
+        <storng></storng>
+        <br>
+
+        <strong>Resolution of a turn: </strong>
+        <ul>
+          <li>A bot must output the coordinates of the square where he wants to place a disc.</li>
+        </ul>
+        <br>
+        <strong>Output</strong><br>
+        <ul>
+            <li>If the coordinates are outside of the board, the game will end and the other player will win.</li>
+            <li>If the coordinates are inside but the square at those coordinates already has a disc, the game will end and the other player will win.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- EXPERT RULES -->
+<div class="statement-section statement-expertrules">
+    <h1>
+        <span class="icon icon-expertrules">&nbsp;</span>
+        <span>Expert Rules</span>
+    </h1>
+    <div class="statement-expert-rules-content">
+      <ul style="padding-bottom: 0;">
+        <li>If a player has no legal moves, his turn will be passed.</li>
+        <li>If both players have no more legal moves, the game will end and the player with more discs will win.</li>
+        <li>If both players have the same amount of discs at the end of the game will end in a draw.</li>
+      </ul>
+    </div>
+</div>
+
+<!-- Victory conditions -->
+<div class="statement-victory-conditions">
+    <div class="icon victory"></div>
+    <div class="blk">
+        <div class="title">Victory Conditions</div>
+        <div class="text">
+            <ul style="padding-bottom: 0;">
+                <li>Have more discs than your opponent.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Lose conditions -->
+<div class="statement-lose-conditions">
+    <div class="icon lose"></div>
+    <div class="blk">
+        <div class="title">Loss Conditions</div>
+        <div class="text">
+            <ul style="padding-bottom: 0;">
+                <li>Have less discs than your opponent.</li>
+                <li>You do not respond in time or output an unrecognized command.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- PROTOCOL -->
+<div class="statement-section statement-protocol">
+    <h1>
+    <span class="icon icon-protocol">&nbsp;</span>
+    <span>Game Input</span>
+</h1>
+
+<!-- Protocol block -->
+<div class="blk">
+    <div class="title">Initial input</div>
+    <div class="text">
+        <span class="statement-lineno">First line</span>: The id of the player(<var>id</var>)
+    </div>
+    <div class="title">Input for one game turn</div>
+    <div class="text">
+        <span class="statement-lineno">First line</span>: <var>height</var>: the number of rows on the board.
+        <br>
+        <span class="statement-lineno">Next <var>height</var> <var>line</var></span>: characters representing one line of your grid, top to bottom. ('.': empty, '0': black, '1': white).
+        <br>
+        <span class="statement-lineno">Next <var>actionCount</var></span>: the number of legal actions.
+        <br>
+        <span class="statement-lineno">Next <var>actionCount</var> <var>action</var></span>: a string represeting the action.
+        <br>
+    </div>
+</div>
+
+<!-- Protocol block -->
+<div class="blk">
+    <div class="title">Output</div>
+    <div class="text">
+        <span class="statement-lineno">A single line</span> containing the coordinates where you want to play. Example "d3".<br>
+        You can also print messages by doing the following. Example: "d3 MSG message".
+    <br>
+    </div>
+</div>
+
+<!-- Protocol block -->
+<div class="blk">
+    <div class="title">Constraints</div>
+    Response time first turn is ≤
+    <const>2000</const> ms.
+    <br>Response time per turn is ≤
+    <const>150</const> ms.
+    </div>
+</div>
+</div>
