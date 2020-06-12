@@ -133,10 +133,10 @@ public class Referee extends AbstractReferee {
     public void sendInputs(int turn) {
         if(turn <= 2) {
             currentPlayer.sendInputLine(Integer.toString(currentPlayer.getIndex()));
+            currentPlayer.sendInputLine(Integer.toString(board.getHEIGHT()));
         }
 
         //Board
-        currentPlayer.sendInputLine(Integer.toString(board.getHEIGHT()));
         Cell[][] cells = board.getCells();
         for(int y = 0; y < board.getHEIGHT(); ++y) {
             String s = "";

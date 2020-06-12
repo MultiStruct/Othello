@@ -6,11 +6,11 @@ class Player {
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         int id = in.nextInt();
+        int height = in.nextInt();
 
         Random rand = new Random(13);
         // game loop
         while (true) {
-            int height = in.nextInt();
             for (int i = 0; i < height; i++) {
                 String line = in.next();
             }

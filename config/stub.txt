@@ -1,7 +1,7 @@
 read id:int
+read boarSize:int
 gameloop
-read height:int
-loop height read line:word(12)
+loop boarSize read line:word(12)
 read actionCount:int
 loop actionCount read action:word(6)
 write f4
