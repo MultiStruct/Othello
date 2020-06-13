@@ -21,5 +21,14 @@ export const options = [
             'OFF': false
         },
         default: false
+    }),
+    ToggleModule.defineToggle({
+        toggle: 'legalToggle',
+        title: 'LEGAL',
+        values: {
+            'ON': true,
+            'OFF': false
+        },
+        default: false
     })
 ];

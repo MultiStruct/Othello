@@ -41,7 +41,8 @@
             <li>The action must be done on an empty square, this square must also be adjacent to at least one opponent disc, this square must also be placed so that at least in one direction (horizontal, vertical or diagonally) there is a disc of the player playing, the disc must form a line over
               the opponent disc/discs, all the opponent discs that are on this line are flipped, if there are multiple lines, all the discs will discs affected will be flipped.</li>
         </ul>
-        <storng></storng>
+<strong>The starting legal moves and the state of the board after black plays d3 is show below:</strong>
+        <p style="text-align: center;"><img src="https://cdn-games.codingame.com/community/1540478-1591830398920/60ffca8d1f6ff4107b16fb91a1b59f36b53289f585503c77a6a645eb40a7a318.png" style="height: 250px; width: auto;"></img></p>
         <br>
 
         <strong>Resolution of a turn: </strong>
@@ -116,11 +117,11 @@
     </div>
     <div class="title">Input for one game turn</div>
     <div class="text">
-        <span class="statement-lineno">Next <var>height</var> <var>line</var></span>: characters representing one line of your grid, top to bottom. ('.': empty, '0': black, '1': white).
+        <span class="statement-lineno">Next <var>boardSize</var> <var>line</var></span>: a string of characters representing one line of your grid, top to bottom. ('.': empty, '0': black, '1': white).
         <br>
         <span class="statement-lineno">Next <var>actionCount</var></span>: the number of legal actions.
         <br>
-        <span class="statement-lineno">Next <var>actionCount</var> <var>action</var></span>: a string represeting the action.
+        <span class="statement-lineno">Next <var>actionCount</var> <var>action</var></span>: a string representing the action.
         <br>
     </div>
 </div>

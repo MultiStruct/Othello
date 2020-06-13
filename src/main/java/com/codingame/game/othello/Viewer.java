@@ -1,11 +1,13 @@
 package com.codingame.game.othello;
 
 import com.codingame.game.Player;
+import com.codingame.game.Referee;
 import com.codingame.gameengine.core.MultiplayerGameManager;
 import com.codingame.gameengine.module.entities.*;
 import com.codingame.gameengine.module.toggle.ToggleModule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Viewer {
     MultiplayerGameManager<Player> gameManager;
@@ -80,7 +82,7 @@ public class Viewer {
 
 
 
-    public void applyAction(Cell cell, int player) {
+    public void applyAction(Cell cell, int player, List<Cell> legalActions) {
         playerUIS[player].group.setAlpha(1);
         playerUIS[player ^ 1].group.setAlpha(0.5);
         graphics.commitEntityState(0, playerUIS[player].group);
@@ -91,16 +93,33 @@ public class Viewer {
 
         int y = cell.y;
         int x = cell.x;
-        pieces[y][x] = graphics.createCircle().setRadius(CIRCLE_RADIUS).setX(rectangles[y][x].getX() + CIRCLE_RADIUS + GAP).setY(rectangles[y][x].getY() + CIRCLE_RADIUS + GAP).setFillColor(colors[player]).setLineWidth(4).setAlpha(0);
-
+        pieces[y][x] = graphics.createCircle().setRadius(20).setX(rectangles[y][x].getX() + CIRCLE_RADIUS + GAP).setY(rectangles[y][x].getY() + CIRCLE_RADIUS + GAP).setFillColor(colors[player]).setLineWidth(4).setZIndex(2);
         graphics.commitEntityState(0, pieces[y][x]);
-        pieces[y][x].setAlpha(1);
-        graphics.commitEntityState(0.3, pieces[y][x]);
+        graphics.commitEntityState(0.2, pieces[y][x]);
+        pieces[y][x].setRadius(CIRCLE_RADIUS);
+        graphics.commitEntityState(0.4, pieces[y][x]);
+
+
+        for (Cell c : legalActions) {
+            if(c == cell) continue;
+            Circle legal = graphics.createCircle()
+                    .setX(rectangles[c.getY()][c.getX()].getX() + CIRCLE_RADIUS + GAP)
+                    .setY(rectangles[c.getY()][c.getX()].getY() + CIRCLE_RADIUS + GAP)
+                    .setFillColor(colors[player])
+                    .setZIndex(1)
+                    .setRadius(20)
+                    .setLineColor(colors[0])
+                    .setLineWidth(4);
+            graphics.commitEntityState(0, legal);
+            legal.setVisible(false);
+            graphics.commitEntityState(0.9, legal);
+            toggleModule.displayOnToggleState(legal, "legalToggle", true);
+        }
 
         // TODO MAYBE ADD A LINE ANIMATION FROM THE PLACE START TO THE FURTHEST CHIP IN A LINE
         ArrayList<ArrayList<Piece>> flips = board.flips;
-        double timer = 0.3;
-        double timePerChain = 0.6;
+        double timer = 0.4;
+        double timePerChain = 0.5;
         for(ArrayList<Piece> row : flips) {
             int lastX = row.get(row.size()-1).getX();
             int lastY = row.get(row.size()-1).getY();
@@ -114,9 +133,9 @@ public class Viewer {
                     .setX2(pieces[lastY+dirY][lastX+dirX].getX())
                     .setY2(pieces[lastY+dirY][lastX+dirX].getY())
                     .setLineColor(gameManager.getPlayer(player).getColorToken())
-                    .setZIndex(2);
+                    .setZIndex(3);
 
-            graphics.commitEntityState(0.3, line);
+            graphics.commitEntityState(timer, line);
             line.setVisible(false);
             graphics.commitEntityState(0.9, line);
             toggleModule.displayOnToggleState(line, "debugToggle", true);

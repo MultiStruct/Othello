@@ -40,7 +40,7 @@ public class Referee extends AbstractReferee {
         // TODO CHANGE THIS
         gameManager.setFirstTurnMaxTime(2000);
         gameManager.setTurnMaxTime(150);
-        gameManager.setFrameDuration(1200);
+        gameManager.setFrameDuration(1400);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Referee extends AbstractReferee {
                     found = true;
                     currentPlayer.lastAction = cell.toString();
                     board.applyAction(cell, currentPlayer.getIndex());
-                    viewer.applyAction(cell, currentPlayer.getIndex());
+                    viewer.applyAction(cell, currentPlayer.getIndex(), legalActions);
                     break;
                 }
             }
