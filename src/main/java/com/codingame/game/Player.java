@@ -5,6 +5,9 @@ public class Player extends AbstractMultiplayerPlayer {
     Player opponent;
     String lastAction = "";
     String message = "";
+    boolean expert = false;
+    String lastMoves = "";
+
     @Override
     public int getExpectedOutputLines() {
         return 1;

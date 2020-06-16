@@ -50,6 +50,12 @@ public class Referee extends AbstractReferee {
             sendInputs(turn);
             currentPlayer.execute();
             String[] outputs = currentPlayer.getOutputs().get(0).split("MSG");
+
+
+            if (outputs[0].contains("EXPERT")) {
+                outputs[0] = outputs[0].replaceAll("EXPERT","");
+                currentPlayer.expert = true;
+            }
             outputs[0] = outputs[0].replaceAll("\\s", "").toLowerCase();
 
             if (outputs.length > 1) {
@@ -57,6 +63,9 @@ public class Referee extends AbstractReferee {
                 outputs[1] = outputs[1].substring(0, Math.min(outputs[1].length(), 12));
                 currentPlayer.message = outputs[1];
             }
+
+            currentPlayer.lastMoves += outputs[0] + ";";
+
 
             boolean found = false;
             for (Cell cell : legalActions) {
@@ -102,6 +111,7 @@ public class Referee extends AbstractReferee {
         if(actions.size() > 0) {
             currentPlayer = currentPlayer.opponent;
             legalActions = actions;
+            currentPlayer.lastMoves = "";
         } else {
             actions = board.getActions(currentPlayer.getIndex());
             if(actions.size() > 0) {
@@ -109,6 +119,7 @@ public class Referee extends AbstractReferee {
                 gameManager.addTooltip(currentPlayer.opponent, currentPlayer.opponent.getNicknameToken() + " pass");
                 gameManager.addToGameSummary(gameManager.formatErrorMessage(currentPlayer.opponent.getNicknameToken() + " had to pass."));
                 currentPlayer.opponent.lastAction = "pass";
+                currentPlayer.opponent.lastMoves = "pass;";
             } else {
                 setWinner();
                 gameManager.endGame();
@@ -149,6 +160,11 @@ public class Referee extends AbstractReferee {
             }
             currentPlayer.sendInputLine(s);
         }
+
+        if (currentPlayer.expert) {
+            currentPlayer.sendInputLine(currentPlayer.opponent.lastMoves);
+        }
+
 
         // Legal actions
         currentPlayer.sendInputLine(Integer.toString(legalActions.size()));
