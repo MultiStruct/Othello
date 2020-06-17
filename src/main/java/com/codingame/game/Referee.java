@@ -122,6 +122,7 @@ public class Referee extends AbstractReferee {
                 currentPlayer.opponent.lastMoves = "pass;";
             } else {
                 setWinner();
+                gameManager.addToGameSummary("No more legal actions for either player!");
                 gameManager.endGame();
             }
         }
